@@ -5,24 +5,24 @@ import javax.servlet.ServletInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class DefaultServletInputStream extends ServletInputStream {
+public class ServletInputStreamAdapter extends ServletInputStream {
     ByteArrayInputStream bais;
-    public DefaultServletInputStream(ByteArrayInputStream bis){
-        this.bais =bis;
+    public ServletInputStreamAdapter(ByteArrayInputStream bais){
+        this.bais =bais;
     }
     @Override
     public boolean isFinished() {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean isReady() {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setReadListener(ReadListener readListener) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override

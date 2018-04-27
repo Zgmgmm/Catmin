@@ -1,22 +1,20 @@
 package me.zgmgmm.catmin;
 
 
+import me.zgmgmm.catmin.Exception.BadRequestException;
 import org.apache.log4j.Logger;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.swing.text.html.HTMLDocument;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
-import java.util.Arrays;
+import java.util.Iterator;
 
 public class Processor implements Runnable {
-    public static Logger logger=Logger.getLogger(Processor.class);
+    private static byte[] CRLF={13,10,13,10};
+    public static Logger logger=Logger.getRootLogger();
     private Connector connector;
     private SocketChannel channel;
     private Request request;
@@ -37,150 +35,123 @@ public class Processor implements Runnable {
         this.channel = channel;
     }
 
-    public void process() throws IOException {
+    public void init() throws IOException {
         channel.configureBlocking(false);
         request=new Request();
         response=new Response();
         response.setRequest(request);
         bb =ByteBuffer.allocate(4096);
-        bb.mark();
-        readAllBytes();
-       // readStartLine();
     }
-
-    private void readAllBytes() throws ClosedChannelException {
-        SelectionKey key=connector.register(channel,SelectionKey.OP_READ);
-        key.attach((OnReadableListener) () -> {
-            int readBytes=0;
-            try {
+    public void process() throws IOException {
+        init();
+        logger.debug(channel.socket().getRemoteSocketAddress()+" register read");
+        connector.register(channel, SelectionKey.OP_READ ,new NIOEventHandler() {
+            @Override
+            public void handle() throws Exception {
+                int from=bb.position();
+                int readBytes=0;
                 readBytes=channel.read(bb);
-            } catch (IOException e) {
-                e.printStackTrace();
-                key.cancel();
-            }
-            if(readBytes==-1){
-                try {
-                    channel.write(bb);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-              //  key.cancel();
+                logger.debug("read "+readBytes);
 
+                //check if \r\n\r\n has been read
+                boolean isHeadersEnd=false;
+
+                if(readBytes==-1) {
+                    isHeadersEnd = true;
+                }else {
+                    int i=from;
+                    int end=bb.position();
+                    byte[] arr = bb.array();
+                    while (i + 3 < end) {
+                        if (arr[i]=='\r'&&arr[i+1]=='\n'&&arr[i+2]=='\r'&&arr[i+3]=='\n') {
+                            isHeadersEnd = true;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                if(!isHeadersEnd){
+                    prepareRequest();
+                }else {
+                    parseRequest();
+                    RequestFacade request=new RequestFacade(Processor.this.request);
+                    ResponseFacade response=new ResponseFacade(Processor.this.response);
+                    new DefaultServlet().service(request,response);
+                    sendResponse();
+                }
+            }
+            @Override
+            public void onException(Exception e){
+                if(e!=null){
+                    //TODO
+                    try {
+                        channel.close();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
             }
         });
     }
 
-    private void readHeader() throws ClosedChannelException {
-        SelectionKey key=connector.register(channel,SelectionKey.OP_READ);
-        key.attach((OnReadableListener) () -> {
-            bb.mark();
-            int readBytes=0;
-            try {
-                readBytes=channel.read(bb);
-            } catch (IOException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-
-            if(readBytes==-1) {
-                key.cancel();
-                return;
-            }
-
-            boolean headerEnd=false;
-            byte[] b=new byte[4];
-            int end = bb.position();
-            bb.reset();
-            while (bb.position()< end){
-                b[3] = bb.get();
-                if(Arrays.equals(b,new byte[]{13,10,13,10})){
-                    headerEnd=true;
-                    break;
-                }
-                b[0]=b[1];
-                b[1]=b[2];
-                b[2]=b[3];
-            }
-            if(headerEnd){
-                //parse header
-                byte[] arr=bb.array();
-                String raw=new String(arr,startLineEnd+2,bb.position()-startLineEnd-4);
-                String[] headers=raw.split("\r\n");
-                for(String header:headers){
-                    String[] pair=header.split(": ");
-                    request.setHeader(pair[0],pair[1]);
-                }
-                logger.info(raw);
-                ByteArrayInputStream bis=new ByteArrayInputStream(bb.array(),bb.position(),end-bb.position());
-                bis.skip(bb.position());
-                request.setInputStream(new DefaultServletInputStream(bis));
-                try {
-                    new SimpleServlet().service(request,response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    readHeader();
-                } catch (ClosedChannelException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
-    }
-    private void readStartLine() throws IOException {
-        SelectionKey key=connector.register(channel,SelectionKey.OP_READ);
-        key.attach((OnReadableListener) () -> {
-            bb.mark();
-            int readBytes=0;
-            try {
-                readBytes=channel.read(bb);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(readBytes==-1) {//no more bytes
-                key.cancel();
-                return;
-            }
-
-            //scan new read bytes for line separator
-            boolean lineEnd=false;
-            byte pre=0;//last byte
-            byte cur=0;//current byte
-            int end = bb.position();
-            bb.reset(); //start at the begin of new read bytes
-            while (bb.position()< end){
-                cur = bb.get();
-                if(pre=='\r'&&cur=='\n'){
-                    lineEnd=true;
-                    break;
-                }
-                pre=cur;
-            }
-
-            if(lineEnd) {//finish
-                startLineEnd=bb.position()-2;
-                request.setStartLine(bb.array(),0,startLineEnd);
-                logger.info(new String(bb.array(),0,startLineEnd));
-                try {
-                    readHeader();
-                } catch (ClosedChannelException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    readStartLine();  //continue reading
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    exception=e;
+    private void sendResponse() throws ClosedChannelException {
+        //send headers
+        StringBuilder builder=new StringBuilder();
+        builder.append("HTTP/1.1 200 OK\r\n\r\n");
+        ByteBuffer[] bufs=new ByteBuffer[2];
+        bufs[0]=ByteBuffer.wrap(builder.toString().getBytes());
+        //send body
+        bufs[1]=ByteBuffer.wrap(Processor.this.response.baos.toByteArray());
+        connector.register(channel, SelectionKey.OP_WRITE, new NIOEventHandler() {
+            @Override
+            public void handle() throws Exception {
+                channel.write(bufs);
+                if(bufs[bufs.length-1].hasRemaining()) {
+                    sendResponse();
+                } else{
+                    finish();
                 }
             }
         });
     }
+
+    private void finish() throws IOException {
+        logger.info(channel.socket().getRemoteSocketAddress() + " finish");
+        channel.close();
+    }
+
+    private void prepareRequest() throws ClosedChannelException {
+        //TODO
+    }
+
+    private void parseRequest() throws BadRequestException {
+        byte[] arr=bb.array();
+        int end=bb.position();
+        int i=0;
+
+        //parse request line
+        while(i+1<end&&!(arr[i]=='\r'&&arr[i+1]=='\n'))++i;
+        //TODO
+        // need to check its validation
+        request.setRequestLine(arr,0,i);
+        i+=2;//skip the next four bytes {\n\r\n};
+
+        int headerStart=i;
+        //find the headers end
+        while(i+3<end&&!(arr[i]=='\r'&&arr[i+1]=='\n'&&arr[i+2]=='\r'&&arr[i+3]=='\n'))++i;
+        HttpUtil.parseHeaders(request.headers,new String(arr,headerStart,i-2-headerStart));
+
+        //set body buffer
+        int bodyStart=i+4;
+        request.bais =new ByteArrayInputStream(arr,bodyStart,end-bodyStart);
+
+        Iterator it=request.headers.entrySet().iterator();
+        while (it.hasNext()) {
+            logger.debug(it.next());
+        }
+    }
+
+
     @Override
     public void run() {
         try {

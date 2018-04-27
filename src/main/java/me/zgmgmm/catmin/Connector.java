@@ -1,36 +1,42 @@
 package me.zgmgmm.catmin;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import org.apache.log4j.Level;
 
 public class Connector {
+    public static final Logger logger = Logger.getRootLogger();
+    static {
+        logger.setLevel(Level.INFO);
+    }
     public static Connector instance;
-    public static final Logger logger = Logger.getLogger(Connector.class);
     InetSocketAddress isa;
     Selector selector;
-    private boolean isShutdown;
-    private Executor executor;
+    private ThreadPoolExecutor threadPool;
     private ServerSocketChannel ssc;
-    private Semaphore semaphore=new Semaphore(1);
-    private AtomicBoolean selectorLock=new AtomicBoolean(false);
     private SelectorHelper selectorHelper;
+    private int corePoolSize = 5;
+    private int maximumPoolSize = 1000;
+    private long keepAliveTime = 5;
+    private boolean isShutdown = false;
+    private int queueCapacity=100;
 
-    public static Connector getConnector(){
-        if(instance==null) {
+    public Connector() throws IOException {
+        init();
+    }
+
+    public static Connector getConnector() {
+        if (instance == null) {
             try {
-                instance=new Connector();
+                instance = new Connector();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,75 +44,89 @@ public class Connector {
         return instance;
     }
 
-    public Connector() throws IOException {
-        isa = new InetSocketAddress("localhost", 80);
-        init();
-    }
-
     public static void main(String[] args) throws IOException {
         Connector connector = Connector.getConnector();
         connector.start();
     }
 
-    private void init() throws IOException {
-        ssc = ServerSocketChannel.open();
-        selector = Selector.open();
-        executor = Executors.newCachedThreadPool();
+    public int getCorePoolSize() {
+        return corePoolSize;
     }
 
-    public void start() {
-        logger.setLevel(Level.INFO);
-        logger.info("connector starting");
+    public void setCorePoolSize(int corePoolSize) {
+        this.corePoolSize = corePoolSize;
+    }
+
+    public int getMaximumPoolSize() {
+        return maximumPoolSize;
+    }
+
+    public void setMaximumPoolSize(int maximumPoolSize) {
+        this.maximumPoolSize = maximumPoolSize;
+    }
+
+    public long getKeepAliveTime() {
+        return keepAliveTime;
+    }
+
+    public void setKeepAliveTime(long keepAliveTime) {
+        this.keepAliveTime = keepAliveTime;
+    }
+
+    private void init() throws IOException {
         isShutdown = false;
-        try {
-            ssc.bind(isa);
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error(e.getLocalizedMessage());
-            return;
-        }
-        executor.execute(() -> {
-            selectorHelper=new SelectorHelper(selector);
-            while (!isShutdown) {
-                int numKeys = 0;
-                try {
-                    numKeys = selectorHelper.select();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    logger.error(e.getLocalizedMessage());
-                    return;
-                }
-                if (numKeys == 0)
-                    continue;
-                Set<SelectionKey> keys = selector.selectedKeys();
-                Iterator<SelectionKey> it = keys.iterator();
-                while (it.hasNext()) {
-                    SelectionKey key = it.next();
-                    logger.debug(key.channel().toString() + " is readable.");
-                    if (key.isReadable()) {
-                        //TODO
-                        OnReadableListener listener= (OnReadableListener) key.attachment();
-                        if(listener!=null)
-                            listener.onReadable();
-                    }
-                    else if (key.isWritable()) {
-                        //TODO
-                        logger.debug(key.channel().toString() + " is writable.");
-                    }
-                    it.remove();
-                }
-            }
-        });
+        isa = new InetSocketAddress("0.0.0.0", 80);
+        ssc = ServerSocketChannel.open();
+        selector = Selector.open();
+        threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<>(queueCapacity),
+                new ThreadPoolExecutor.DiscardOldestPolicy());
+    }
 
-
+    public void start() throws IOException {
+        logger.info("connector starting");
+        ssc.configureBlocking(false);
+        ssc.register(selector, SelectionKey.OP_ACCEPT);
+        ssc.bind(isa);
+        selectorHelper = new SelectorHelper(selector);
         while (!isShutdown) {
+            int numKeys = 0;
             try {
-                SocketChannel channel = ssc.accept();
-                executor.execute(newProcessor(channel));
+                numKeys = selectorHelper.select();
             } catch (IOException e) {
                 e.printStackTrace();
+                logger.debug(e.getLocalizedMessage());
+                return;
+            }
+            if (numKeys == 0)
+                continue;
+            Set<SelectionKey> keys = selector.selectedKeys();
+            Iterator<SelectionKey> it = keys.iterator();
+            while (it.hasNext()) {
+                SocketChannel channel;
+                SelectionKey key = it.next();
+                it.remove();
+                if(!key.isValid())
+                    continue;
+                if (key.isAcceptable()) {
+                    channel = ssc.accept();
+                    if(channel==null)
+                        continue;
+                    channel.configureBlocking(false);
+                    threadPool.execute(newProcessor(channel));
+                    logger.info(channel.socket().getRemoteSocketAddress() + " connect");
+                    continue;
+                }
+                channel= (SocketChannel) key.channel();
+                if (key.isReadable()||key.isWritable()) {
+                    NIOEventHandler handler = (NIOEventHandler) key.attachment();
+                    logger.debug(channel.socket().getRemoteSocketAddress() + " is writable.");
+                    threadPool.submit(handler);
+                }
+                key.cancel();
             }
         }
+
     }
 
     public void shutdown() throws IOException {
@@ -129,24 +149,18 @@ public class Connector {
         return processor;
     }
 
-    public Selector getSelector() {
-        return selector;
-    }
-
-    public Logger getLogger() {
-        return logger;
-    }
 
     public SelectionKey register(SelectableChannel channel, int ops) throws ClosedChannelException {
-        return selectorHelper.register(channel,ops);
+        return selectorHelper.register(channel, ops);
     }
-    public synchronized SelectionKey register(SelectableChannel channel, int ops, Object attachment) throws ClosedChannelException {
-        return selectorHelper.register(channel,ops,attachment);
+
+    public synchronized SelectionKey register(SelectableChannel channel, int ops, NIOEventHandler handler) throws ClosedChannelException {
+        return selectorHelper.register(channel, ops, handler);
     }
 
     public class SelectorHelper {
-        private volatile boolean mark = false;
         private final Selector selector;
+        private volatile boolean mark = false;
 
         public SelectorHelper(Selector selector) {
             this.selector = selector;
@@ -157,11 +171,12 @@ public class Connector {
         }
 
         public SelectionKey register(SelectableChannel channel, int ops) throws ClosedChannelException {
-            return register(channel,ops,null);
+            return register(channel, ops, null);
         }
 
         /**
          * 必须是同步的， 保证多个线程调用reg的时候不会出现问题
+         *
          * @param channel
          * @param ops
          * @param attachment
@@ -171,15 +186,17 @@ public class Connector {
         public synchronized SelectionKey register(SelectableChannel channel, int ops, Object attachment) throws ClosedChannelException {
             mark = true;
             selector.wakeup();
-            SelectionKey key = channel.register(selector, ops, attachment);
+            SelectionKey key = channel.keyFor(selector);
+            if(key==null)
+                channel.register(selector, ops, attachment);
             mark = false;
             return key;
         }
 
         public int select() throws IOException {
-            for (;;) {
-                if (mark == true)
-                    continue;
+            for (; ; ) {
+                while (mark);
+
                 int select = selector.select();
                 if (select > 0)
                     return select;

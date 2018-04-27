@@ -9,7 +9,7 @@
         <module name="Catmin" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="9">
       <module name="Catmin" target="1.8" />
     </bytecodeTargetLevel>
   </component>

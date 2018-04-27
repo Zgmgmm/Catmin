@@ -3,37 +3,27 @@ package me.zgmgmm.catmin;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.nio.ByteBuffer;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
-public class Response implements HttpServletResponse {
-    private final HashMap<String,List<String>> headers;
-    private Request request;
-    ByteArrayOutputStream baos=new ByteArrayOutputStream();
-    private String statusMeg;
-    private int status;
-    ServletOutputStream out;
-    private PrintWriter writer;
-    private boolean usingStream=false;
-    private boolean usingWriter=false;
+public class ResponseFacade implements HttpServletResponse {
+    private Response response;
 
-    public Response(){
-        headers = new HashMap<>();
-        out=new ServletOutputStreamAdapter(baos);
+    public ResponseFacade(Response response){
+        this.response=response;
+
     }
     @Override
     public void addCookie(Cookie cookie) {
+
     }
 
     @Override
     public boolean containsHeader(String s) {
-        return request.headers.containsKey(s);
+        return false;
     }
 
     @Override
@@ -103,18 +93,17 @@ public class Response implements HttpServletResponse {
 
     @Override
     public void setStatus(int i) {
-        status=i;
+
     }
 
     @Override
     public void setStatus(int i, String s) {
-        status=i;
-        statusMeg=s;
+
     }
 
     @Override
     public int getStatus() {
-        return status;
+        return 0;
     }
 
     @Override
@@ -144,18 +133,12 @@ public class Response implements HttpServletResponse {
 
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
-        if(usingWriter)
-            throw new IllegalStateException("Using Writer!");
-        return out;
+      return response.getOutputStream();
     }
 
     @Override
     public PrintWriter getWriter() throws IOException {
-        if(usingStream)
-            throw new IllegalStateException("Using Stream!");
-        if(writer==null)
-            writer=new PrintWriter(out);
-        return writer;
+        return response.getWriter();
     }
 
     @Override
@@ -216,13 +199,5 @@ public class Response implements HttpServletResponse {
     @Override
     public Locale getLocale() {
         return null;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
     }
 }

@@ -3,56 +3,19 @@ package me.zgmgmm.catmin;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
 import java.security.Principal;
-import java.util.*;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Map;
 
-public class Request implements HttpServletRequest {
-    Response response;
-    byte[] requestLine;
-    int methodEnd;
-    int uriEnd;
-    int schemeEnd;
-    ByteArrayInputStream bais;
-    Map<String, String> headers;
-    private ServletInputStream in;
-
-    public Request() {
-        requestLine = new byte[512];
-        headers = new HashMap<>();
-        in= new ServletInputStreamAdapter(bais);
+public class RequestFacade implements HttpServletRequest {
+    private Request request;
+    public RequestFacade(Request request){
+        this.request=request;
     }
-
-    public void setHeader(String name, String value) {
-        headers.put(name, value);
-    }
-
-    @Override
-    public String getHeader(String name) {
-        return headers.get(name);
-    }
-
-    public void setRequestLine(byte[] startLine) {
-        setRequestLine(startLine, 0, startLine.length);
-    }
-
-    public void setRequestLine(byte[] startLine, int offset, int length) {
-        if (length > this.requestLine.length)
-            this.requestLine = Arrays.copyOfRange(startLine, offset, length);
-        else
-            System.arraycopy(startLine, offset, this.requestLine, 0, length);
-        //parse
-        int i = 0;
-        while (i < length - offset && this.requestLine[i++] != ' ') ;
-        methodEnd = i - 1;
-        while (i < length - offset && this.requestLine[i++] != ' ') ;
-        uriEnd = i - 1;
-        schemeEnd = length - offset;
-    }
-
     @Override
     public String getAuthType() {
         return null;
@@ -66,6 +29,11 @@ public class Request implements HttpServletRequest {
     @Override
     public long getDateHeader(String s) {
         return 0;
+    }
+
+    @Override
+    public String getHeader(String s) {
+        return request.getHeader(s);
     }
 
     @Override
@@ -85,12 +53,12 @@ public class Request implements HttpServletRequest {
 
     @Override
     public String getMethod() {
-        return new String(requestLine, 0, methodEnd);
+        return request.getMethod();
     }
 
     @Override
     public String getPathInfo() {
-        return new String(requestLine, methodEnd + 1, uriEnd - methodEnd - 1);
+        return request.getPathInfo();
     }
 
     @Override
@@ -245,10 +213,8 @@ public class Request implements HttpServletRequest {
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        //TODO
-        return in;
+        return request.getInputStream();
     }
-
 
     @Override
     public String getParameter(String s) {
@@ -272,12 +238,12 @@ public class Request implements HttpServletRequest {
 
     @Override
     public String getProtocol() {
-        return new String(requestLine, uriEnd + 1, schemeEnd);
+        return null;
     }
 
     @Override
     public String getScheme() {
-        return getProtocol().indexOf('s') == -1 ? "HTTP" : "HTTPS";
+        return null;
     }
 
     @Override
@@ -331,8 +297,8 @@ public class Request implements HttpServletRequest {
     }
 
     @Override
-    public RequestDispatcher getRequestDispatcher(String s) {
-        return null;
+    public RequestDispatcher getRequestDispatcher(String path) {
+        return RequestDispatcherImpl.newInstance(request,request.response,path);
     }
 
     @Override
