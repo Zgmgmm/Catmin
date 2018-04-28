@@ -2,7 +2,6 @@ package me.zgmgmm.catmin;
 
 import me.zgmgmm.catmin.Connector.Filter;
 import me.zgmgmm.catmin.Connector.FilterChain;
-import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

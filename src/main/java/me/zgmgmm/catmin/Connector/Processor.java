@@ -3,7 +3,6 @@ package me.zgmgmm.catmin.Connector;
 
 import me.zgmgmm.catmin.Exception.BadRequestException;
 import me.zgmgmm.catmin.HttpUtil;
-import org.apache.log4j.Logger;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
