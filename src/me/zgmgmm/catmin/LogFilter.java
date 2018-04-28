@@ -14,8 +14,12 @@ public class LogFilter implements Filter {
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         System.out.println(request.getRemoteAddr()+" request "+"url: "+request.getRequestURI());
         //logger.info(request.getRemoteAddr()+" request "+"url: "+request.getRequestURI());
-        chain.doFilterChain(request,response);
-        System.out.println(request.getRemoteAddr()+" finish");
+        try {
+            chain.doFilterChain(request, response);
+            System.out.println(request.getRemoteAddr() + " finish");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //logger.info(request.getRemoteAddr()+" finish");
     }
 }
