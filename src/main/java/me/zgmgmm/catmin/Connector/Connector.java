@@ -15,7 +15,7 @@ import org.apache.log4j.Level;
 
 public class Connector {
 
-    //public static final Logger logger = Logger.getLogger(Connector.class);
+    public static final Logger logger = Logger.getLogger(Connector.class);
     public static final String DEFAULT_HOST="0.0.0.0";
     public static final int DEFAULT_PORT=80;
     static {
@@ -89,6 +89,7 @@ public class Connector {
 
 
     public void start() throws IOException {
+
     //    logger.info("connector starting");
         ssc.configureBlocking(false);
         ssc.register(selector, SelectionKey.OP_ACCEPT);

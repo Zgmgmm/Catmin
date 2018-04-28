@@ -162,9 +162,10 @@ public class Processor implements Runnable {
         request.bais =new ByteArrayInputStream(arr,bodyStart,end-bodyStart);
 
         Iterator it=request.headers.entrySet().iterator();
-        while (it.hasNext()) {
-      //      logger.debug(it.next());
-        }
+
+        /* while (it.hasNext()) {
+          logger.debug(it.next());
+        }*/
     }
 
 
