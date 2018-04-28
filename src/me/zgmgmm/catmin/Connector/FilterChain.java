@@ -31,6 +31,7 @@ public class FilterChain {
     }
 
     public void doFilterChain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("in chain");
         if(it==null)
             it=filters.iterator();
         if(it.hasNext()){
