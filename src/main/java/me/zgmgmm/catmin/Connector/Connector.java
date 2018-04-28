@@ -12,15 +12,14 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Level;
-import org.apache.log4j.jmx.LoggerDynamicMBean;
 
 public class Connector {
 
-    public static final Logger logger = Logger.getLogger(Connector.class);
+    //public static final Logger logger = Logger.getLogger(Connector.class);
     public static final String DEFAULT_HOST="0.0.0.0";
     public static final int DEFAULT_PORT=80;
     static {
-        logger.setLevel(Level.INFO);
+    //    logger.setLevel(Level.INFO);
     }
     public static Connector instance;
     InetSocketAddress isa;
@@ -90,7 +89,7 @@ public class Connector {
 
 
     public void start() throws IOException {
-        logger.info("connector starting");
+    //    logger.info("connector starting");
         ssc.configureBlocking(false);
         ssc.register(selector, SelectionKey.OP_ACCEPT);
         ssc.bind(isa);
@@ -101,7 +100,7 @@ public class Connector {
                 numKeys = selectorHelper.select();
             } catch (IOException e) {
                 e.printStackTrace();
-                logger.debug(e.getLocalizedMessage());
+   //             logger.debug(e.getLocalizedMessage());
                 return;
             }
             if (numKeys == 0)
@@ -125,7 +124,7 @@ public class Connector {
                 channel= (SocketChannel) key.channel();
                 if (key.isReadable()||key.isWritable()) {
                     NIOEventHandler handler = (NIOEventHandler) key.attachment();
-                    logger.debug(channel.socket().getRemoteSocketAddress() + " is writable.");
+                    //logger.debug(channel.socket().getRemoteSocketAddress() + " is writable.");
                     threadPool.submit(handler);
                 }
                 key.cancel();

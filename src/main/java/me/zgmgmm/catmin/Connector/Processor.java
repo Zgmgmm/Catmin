@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public class Processor implements Runnable {
     private static byte[] CRLF={13,10,13,10};
-    public static Logger logger=Logger.getLogger(Process.class);
+ //   public static Logger logger=Logger.getLogger(Process.class);
     private Connector connector;
     private SocketChannel channel;
     private Request request;
@@ -47,14 +47,14 @@ public class Processor implements Runnable {
     }
     public void process() throws IOException {
         init();
-        logger.debug(channel.socket().getRemoteSocketAddress()+" register read");
+     //   logger.debug(channel.socket().getRemoteSocketAddress()+" register read");
         connector.register(channel, SelectionKey.OP_READ ,new NIOEventHandler() {
             @Override
             public void handle() throws Exception {
                 int from=bb.position();
                 int readBytes=0;
                 readBytes=channel.read(bb);
-                logger.debug("read "+readBytes);
+     //           logger.debug("read "+readBytes);
 
                 //check if \r\n\r\n has been read
                 boolean isHeadersEnd=false;
@@ -163,7 +163,7 @@ public class Processor implements Runnable {
 
         Iterator it=request.headers.entrySet().iterator();
         while (it.hasNext()) {
-            logger.debug(it.next());
+      //      logger.debug(it.next());
         }
     }
 
@@ -174,7 +174,7 @@ public class Processor implements Runnable {
             process();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info(e.getLocalizedMessage());
+    //        logger.info(e.getLocalizedMessage());
         }
     }
 }

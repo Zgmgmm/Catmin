@@ -7,16 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfdfd334-71d0-4058-b7c5-a524700f2b79" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Catmin.iml" afterPath="$PROJECT_DIR$/Catmin.iml" />
-      <change beforePath="$PROJECT_DIR$/firestorm.log" afterPath="$PROJECT_DIR$/firestorm.log" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Connector.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Connector.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Processor.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Processor.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Connector$SelectorHelper.class" afterPath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Connector$SelectorHelper.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Connector.class" afterPath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Connector.class" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -49,18 +43,8 @@
       <file leaf-file-name="Processor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Processor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="18" column="62" lean-forward="false" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Request.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Request.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+            <state relative-caret-position="536">
+              <caret line="176" column="6" lean-forward="false" selection-start-line="176" selection-start-column="6" selection-end-line="176" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -116,6 +100,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Connector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Connector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="126" column="22" lean-forward="false" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="RequestDispatcherImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -126,21 +122,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="log4j.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/target/classes/log4j.properties">
+      <file leaf-file-name="LogFilter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="297">
+              <caret line="18" column="62" lean-forward="false" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NIOEventHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/NIOEventHandler.java">
+      <file leaf-file-name="log4j.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/target/classes/log4j.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+            <state relative-caret-position="108">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,8 +157,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getout</find>
-      <find>getpath</find>
       <find>logger.</find>
       <find>get</find>
       <find>conn</find>
@@ -190,6 +184,8 @@
       <find>error</find>
       <find>getrequest</find>
       <find>policy</find>
+      <find>logger</find>
+      <find>logg</find>
       <find>log</find>
     </findStrings>
   </component>
@@ -245,16 +241,16 @@
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/RequestFacade.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/ResponseFacade.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultErrorHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/RequestWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Request.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/ResponseWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Response.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Connector.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Processor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java" />
       </list>
     </option>
   </component>
@@ -662,12 +658,12 @@
       <workItem from="1524712601025" duration="30546000" />
       <workItem from="1524797155444" duration="6964000" />
       <workItem from="1524831555979" duration="26516000" />
-      <workItem from="1524883261659" duration="15942000" />
+      <workItem from="1524883261659" duration="17048000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96337000" />
+    <option name="totallyTimeSpent" value="97443000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -691,8 +687,8 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14622642" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21975583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16426194" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21975583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12763596" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19989339" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1167,14 +1163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -1234,16 +1222,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Connector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="18" column="56" lean-forward="false" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Filter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -1264,14 +1242,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Processor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="18" column="62" lean-forward="false" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1324,6 +1294,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/target/classes/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Connector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="126" column="22" lean-forward="false" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Processor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="176" column="6" lean-forward="false" selection-start-line="176" selection-start-column="6" selection-end-line="176" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -1332,10 +1328,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/log4j.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/LogFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="297">
+          <caret line="18" column="62" lean-forward="false" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
           <folding />
         </state>
       </provider>
