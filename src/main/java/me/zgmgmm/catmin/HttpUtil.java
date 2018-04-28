@@ -4,11 +4,11 @@ import me.zgmgmm.catmin.Exception.BadRequestException;
 import org.apache.log4j.Logger;
 
 import java.nio.ByteBuffer;
+import java.util.Date;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 public class HttpUtil {
-    public static Logger logger=Logger.getRootLogger();
     public static void parseHeaders(Map<String,String> target, String data) throws BadRequestException {
         StringTokenizer tokenizer=new StringTokenizer(data,"\r\n");
         while(tokenizer.hasMoreElements()){
@@ -20,9 +20,5 @@ public class HttpUtil {
                 throw new BadRequestException("Illegal header format: "+data);
             }
         }
-    }
-    public static boolean readEnd(ByteBuffer buffer){
-        //TODO
-        return true;
     }
 }

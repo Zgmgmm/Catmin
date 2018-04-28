@@ -12,23 +12,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class DefaultServlet extends HttpServlet {
-
+    public static String WEB_ROOT= System.getProperty("user.dir");
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Path path=Paths.get(System.getProperty("user.dir"),req.getPathInfo());
+        Path path = Paths.get(WEB_ROOT,req.getPathInfo());
         File file=path.toFile();
         if(!file.exists()||!file.isFile()){
-            resp.setStatus(404);
+            resp.sendError(404);
+            return;
         }
+        long time=file.lastModified();
+        resp.setDateHeader("Last-Modified",time);
         OutputStream out=resp.getOutputStream();
         FileInputStream fis=new FileInputStream(file);
-        long transferred = 0;
-        byte[] buffer = new byte[1024];
-        int read;
-        while ((read = fis.read(buffer, 0, 1024)) >= 0) {
-            out.write(buffer, 0, read);
-            transferred += read;
-        }
+        fis.transferTo(out);
         fis.close();
     }
 }

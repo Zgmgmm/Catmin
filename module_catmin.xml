@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_catmin" default="compile.module.catmin">
+  <dirname property="module.catmin.basedir" file="${ant.file.module_catmin}"/>
+  
+  <property name="module.jdk.home.catmin" value="${jdk.home.9.0}"/>
+  <property name="module.jdk.bin.catmin" value="${jdk.bin.9.0}"/>
+  <property name="module.jdk.classpath.catmin" value="jdk.classpath.9.0"/>
+  
+  <property name="compiler.args.catmin" value="-encoding UTF-8 -source 9 -target 9 ${compiler.args}"/>
+  
+  <property name="catmin.output.dir" value="${module.catmin.basedir}/target/classes"/>
+  <property name="catmin.testoutput.dir" value="${module.catmin.basedir}/target/test-classes"/>
+  
+  <path id="catmin.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="catmin.module.production.classpath">
+    <path refid="${module.jdk.classpath.catmin}"/>
+    <path refid="library.tomcat_9.0.7.classpath"/>
+    <path refid="library.commons-lang3-3.7.classpath"/>
+    <path refid="library.log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.javax.servlet:servlet-api:2.4.classpath"/>
+  </path>
+  
+  <path id="catmin.runtime.production.module.classpath">
+    <pathelement location="${catmin.output.dir}"/>
+    <path refid="library.log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.javax.servlet:servlet-api:2.4.classpath"/>
+  </path>
+  
+  <path id="catmin.module.classpath">
+    <path refid="${module.jdk.classpath.catmin}"/>
+    <pathelement location="${catmin.output.dir}"/>
+    <path refid="library.tomcat_9.0.7.classpath"/>
+    <path refid="library.commons-lang3-3.7.classpath"/>
+    <path refid="library.log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.javax.servlet:servlet-api:2.4.classpath"/>
+  </path>
+  
+  <path id="catmin.runtime.module.classpath">
+    <pathelement location="${catmin.testoutput.dir}"/>
+    <pathelement location="${catmin.output.dir}"/>
+    <path refid="library.tomcat_9.0.7.classpath"/>
+    <path refid="library.commons-lang3-3.7.classpath"/>
+    <path refid="library.log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.javax.servlet:servlet-api:2.4.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.catmin">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.catmin">
+    <patternset refid="excluded.from.module.catmin"/>
+  </patternset>
+  
+  <path id="catmin.module.sourcepath">
+    <dirset dir="${module.catmin.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+      <include name="web/WEB-INF/Servlet"/>
+    </dirset>
+  </path>
+  
+  <path id="catmin.module.test.sourcepath">
+    <dirset dir="${module.catmin.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.catmin" depends="compile.module.catmin.production,compile.module.catmin.tests" description="Compile module Catmin"/>
+  
+  <target name="compile.module.catmin.production" depends="register.custom.compilers" description="Compile module Catmin; production classes">
+    <mkdir dir="${catmin.output.dir}"/>
+    <javac2 destdir="${catmin.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.catmin}/javac">
+      <compilerarg line="${compiler.args.catmin}"/>
+      <bootclasspath refid="catmin.module.bootclasspath"/>
+      <classpath refid="catmin.module.production.classpath"/>
+      <src refid="catmin.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.catmin"/>
+    </javac2>
+    
+    <copy todir="${catmin.output.dir}">
+      <fileset dir="${module.catmin.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.catmin.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.catmin.basedir}/web/WEB-INF/Servlet">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.catmin.tests" depends="register.custom.compilers,compile.module.catmin.production" description="compile module Catmin; test classes" unless="skip.tests">
+    <mkdir dir="${catmin.testoutput.dir}"/>
+    <javac2 destdir="${catmin.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.catmin}/javac">
+      <compilerarg line="${compiler.args.catmin}"/>
+      <bootclasspath refid="catmin.module.bootclasspath"/>
+      <classpath refid="catmin.module.classpath"/>
+      <src refid="catmin.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.catmin"/>
+    </javac2>
+    
+    <copy todir="${catmin.testoutput.dir}">
+      <fileset dir="${module.catmin.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.catmin" description="cleanup module">
+    <delete dir="${catmin.output.dir}"/>
+    <delete dir="${catmin.testoutput.dir}"/>
+  </target>
+</project>
