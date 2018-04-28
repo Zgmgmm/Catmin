@@ -72,6 +72,7 @@ public class RequestDispatcherImpl implements RequestDispatcher {
     @Override
     public void forward(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
         //TODO
+        System.out.println("forward "+servlet);
         chain.doFilterChain(request,response);
     }
 
