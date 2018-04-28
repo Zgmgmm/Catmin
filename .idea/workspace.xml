@@ -2,62 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1c0a66c-bb08-4463-9d79-ea53f7caa08a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_1.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Catmin_war_exploded.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Zgmgmm.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_7.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_servlet_api_2_4.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_17.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_log4j_1_2_17.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Catmin.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/catmin.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/catmin.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/firestorm.log" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/firestorm.log.1" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/module_catmin.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Request.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Request.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/RequestWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/RequestWrapper.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Response.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Response.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/ResponseWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/ResponseWrapper.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java" afterPath="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SimpleServlet.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Bootstrap.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Connector$SelectorHelper.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Connector.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Filter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/FilterChain.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/NIOEventHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Processor$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Processor$2.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Processor.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Request.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/RequestWrapper.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/Response.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/ResponseWrapper.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/ServletInputStreamAdapter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/ServletOutputStreamAdapter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Connector/URLMapping.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/DefaultErrorHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/DefaultServlet.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Exception/BadRequestException.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/Exception/WEBConfigException.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/HttpUtil.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/LogFilter.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/zgmgmm/catmin/RequestDispatcherImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/Client.class" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,7 +25,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Response.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Response.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/Response.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
@@ -87,6 +33,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultServlet.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="17" column="58" lean-forward="true" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -113,6 +69,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="RequestDispatcherImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -127,6 +93,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/Connector/ServletInputStreamAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java" />
       </list>
     </option>
   </component>
@@ -343,12 +310,12 @@
       <option name="presentableId" value="Default" />
       <updated>1524918875044</updated>
       <workItem from="1524918876790" duration="285000" />
-      <workItem from="1524919240041" duration="13000" />
+      <workItem from="1524919240041" duration="710000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="298000" />
+    <option name="totallyTimeSpent" value="995000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -360,11 +327,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39955604" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -373,7 +340,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39955604" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -391,7 +358,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -465,6 +440,22 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/RequestDispatcherImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="23" column="52" lean-forward="true" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/zgmgmm/catmin/DefaultServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="17" column="58" lean-forward="true" selection-start-line="17" selection-start-column="58" selection-end-line="17" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

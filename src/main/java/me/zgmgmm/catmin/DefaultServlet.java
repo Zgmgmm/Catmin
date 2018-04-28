@@ -17,6 +17,7 @@ public class DefaultServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Path path = Paths.get(WEB_ROOT,req.getPathInfo());
         File file=path.toFile();
+        System.out.println(file.getAbsolutePath());
         if(!file.exists()||!file.isFile()){
             resp.sendError(404);
             return;
