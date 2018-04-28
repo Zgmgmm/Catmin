@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Catmin.iml" filepath="$PROJECT_DIR$/Catmin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyNIO.iml" filepath="$PROJECT_DIR$/MyNIO.iml" />
     </modules>
   </component>
 </project>

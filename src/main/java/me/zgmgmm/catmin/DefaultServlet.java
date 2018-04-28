@@ -25,7 +25,10 @@ public class DefaultServlet extends HttpServlet {
         resp.setDateHeader("Last-Modified",time);
         OutputStream out=resp.getOutputStream();
         FileInputStream fis=new FileInputStream(file);
-        fis.transferTo(out);
+        byte[] buf=new byte[1024];
+        while(fis.read(buf)!=-1){
+            out.write(buf);
+        }
         fis.close();
     }
 }
