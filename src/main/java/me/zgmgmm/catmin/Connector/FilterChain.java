@@ -35,7 +35,9 @@ public class FilterChain {
             it=filters.iterator();
         if(it.hasNext()){
             it.next().doFilter(request,response,this);
+            System.out.println(it.toString());
         }else{
+            System.out.println(servlet.toString());
             servlet.service(request,response);
         }
     }
