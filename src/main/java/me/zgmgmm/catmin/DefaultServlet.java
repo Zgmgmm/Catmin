@@ -15,7 +15,7 @@ public class DefaultServlet extends HttpServlet {
     public static String WEB_ROOT= System.getProperty("user.dir");
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Path path = Paths.get(WEB_ROOT,req.getPathInfo());
+        Path path = Paths.get(WEB_ROOT,req.getPathInfo().substring(1));
         File file=path.toFile();
         System.out.println(file.getAbsolutePath());
         if(!file.exists()||!file.isFile()){
