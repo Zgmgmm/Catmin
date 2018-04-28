@@ -1452,3 +1452,5 @@ INFO pool-1-thread-4 root - /127.0.0.1:56265 request url: /szu.html
 INFO pool-1-thread-4 root - /127.0.0.1:56265 finish
 INFO pool-1-thread-5 root - /127.0.0.1:56266 request url: /szu.html
 INFO pool-1-thread-5 root - /127.0.0.1:56266 finish
+INFO main root - connector starting
+INFO main me.zgmgmm.catmin.Connector.Connector - connector starting

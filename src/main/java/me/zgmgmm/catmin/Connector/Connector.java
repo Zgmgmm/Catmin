@@ -1,5 +1,6 @@
 package me.zgmgmm.catmin.Connector;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -11,9 +12,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Level;
+import org.apache.log4j.jmx.LoggerDynamicMBean;
 
 public class Connector {
-    public static final Logger logger = Logger.getRootLogger();
+
+    public static final Logger logger = Logger.getLogger(Connector.class);
     public static final String DEFAULT_HOST="0.0.0.0";
     public static final int DEFAULT_PORT=80;
     static {

@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public class Processor implements Runnable {
     private static byte[] CRLF={13,10,13,10};
-    public static Logger logger=Logger.getRootLogger();
+    public static Logger logger=Logger.getLogger(Process.class);
     private Connector connector;
     private SocketChannel channel;
     private Request request;
